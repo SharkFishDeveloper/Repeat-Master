@@ -4,6 +4,7 @@ class TaskModal {
   final String title;
   final bool isDone;
   final String id;
+
   TaskModal({
     required this.title,
     required this.isDone,
