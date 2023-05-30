@@ -1,8 +1,8 @@
 part of 'home_bloc.dart';
 
 @immutable
-abstract class HomeState {}
+abstract class HomeScreenState {}
 
-class NoTaskState extends HomeState {}
+class NoTaskState extends HomeScreenState {}
 
-class AddedTasksState extends HomeState {}
+class AddedTasksState extends HomeScreenState {}

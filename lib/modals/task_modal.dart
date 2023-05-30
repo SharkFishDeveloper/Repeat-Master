@@ -3,23 +3,35 @@ import 'dart:convert';
 class TaskModal {
   final String title;
   final bool isDone;
+  final String description;
+  final DateTime dateTime;
   final String id;
+  final int rating;
 
   TaskModal({
     required this.title,
     required this.isDone,
+    required this.description,
+    required this.dateTime,
     required this.id,
+    required this.rating,
   });
 
   TaskModal copyWith({
     String? title,
     bool? isDone,
+    String? description,
+    DateTime? dateTime,
     String? id,
+    int? rating,
   }) {
     return TaskModal(
       title: title ?? this.title,
       isDone: isDone ?? this.isDone,
+      description: description ?? this.description,
+      dateTime: dateTime ?? this.dateTime,
       id: id ?? this.id,
+      rating: rating ?? this.rating,
     );
   }
 
@@ -27,7 +39,10 @@ class TaskModal {
     return {
       'title': title,
       'isDone': isDone,
+      'description': description,
+      'dateTime': dateTime.millisecondsSinceEpoch,
       'id': id,
+      'rating': rating,
     };
   }
 
@@ -35,7 +50,10 @@ class TaskModal {
     return TaskModal(
       title: map['title'] ?? '',
       isDone: map['isDone'] ?? false,
+      description: map['description'] ?? '',
+      dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime']),
       id: map['id'] ?? '',
+      rating: map['rating']?.toInt() ?? 0,
     );
   }
 
@@ -45,7 +63,9 @@ class TaskModal {
       TaskModal.fromMap(json.decode(source));
 
   @override
-  String toString() => 'TaskModal(title: $title, isDone: $isDone, id: $id)';
+  String toString() {
+    return 'TaskModal(title: $title, isDone: $isDone, description: $description, dateTime: $dateTime, id: $id, rating: $rating)';
+  }
 
   @override
   bool operator ==(Object other) {
@@ -54,9 +74,19 @@ class TaskModal {
     return other is TaskModal &&
         other.title == title &&
         other.isDone == isDone &&
-        other.id == id;
+        other.description == description &&
+        other.dateTime == dateTime &&
+        other.id == id &&
+        other.rating == rating;
   }
 
   @override
-  int get hashCode => title.hashCode ^ isDone.hashCode ^ id.hashCode;
+  int get hashCode {
+    return title.hashCode ^
+        isDone.hashCode ^
+        description.hashCode ^
+        dateTime.hashCode ^
+        id.hashCode ^
+        rating.hashCode;
+  }
 }
