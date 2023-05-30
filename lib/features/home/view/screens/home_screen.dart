@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/home_bloc.dart';
+import '../widgets/task_input_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -17,8 +18,13 @@ class HomeScreen extends StatelessWidget {
               child: Text("No Task"),
             );
           } else if (state is AddedTasksState) {
-            return const Center(
-              child: Text("You have Tasks"),
+            return ListView.builder(
+              itemCount: state.taskNameList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(state.taskNameList[index]),
+                );
+              },
             );
           }
           return const Center(
@@ -33,9 +39,11 @@ class HomeScreen extends StatelessWidget {
             builder: (BuildContext context) {
               return TaskInputDialog();
             },
-          ).then((result) {
-            if (result != null) {
-              print('Entered name: $result');
+          ).then((taskname) {
+            if (taskname != null) {
+              final homeBloc = BlocProvider.of<HomeBloc>(context);
+              homeBloc.add(AddTaskEvent(taskname)); // adding event to add task
+              print('Entered name: $taskname');
             }
           });
         },
