@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-class TaskModal {
+import 'package:equatable/equatable.dart';
+
+class TaskModal extends Equatable {
   final String title;
   final bool isDone;
   final String description;
@@ -67,26 +69,30 @@ class TaskModal {
     return 'TaskModal(title: $title, isDone: $isDone, description: $description, dateTime: $dateTime, id: $id, rating: $rating)';
   }
 
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+  // @override
+  // bool operator ==(Object other) {
+  //   if (identical(this, other)) return true;
 
-    return other is TaskModal &&
-        other.title == title &&
-        other.isDone == isDone &&
-        other.description == description &&
-        other.dateTime == dateTime &&
-        other.id == id &&
-        other.rating == rating;
-  }
+  //   return other is TaskModal &&
+  //       other.title == title &&
+  //       other.isDone == isDone &&
+  //       other.description == description &&
+  //       other.dateTime == dateTime &&
+  //       other.id == id &&
+  //       other.rating == rating;
+  // }
 
+  // @override
+  // int get hashCode {
+  //   return title.hashCode ^
+  //       isDone.hashCode ^
+  //       description.hashCode ^
+  //       dateTime.hashCode ^
+  //       id.hashCode ^
+  //       rating.hashCode;
+  // }
+  
   @override
-  int get hashCode {
-    return title.hashCode ^
-        isDone.hashCode ^
-        description.hashCode ^
-        dateTime.hashCode ^
-        id.hashCode ^
-        rating.hashCode;
-  }
+  // TODO: implement props
+  List<Object?> get props => [id,title,rating,dateTime,isDone,description];
 }

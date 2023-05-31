@@ -5,6 +5,7 @@ import '../../bloc/home_bloc.dart';
 import '../widgets/task_input_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
+ final List<String> taskList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +43,8 @@ class HomeScreen extends StatelessWidget {
           ).then((taskname) {
             if (taskname != null) {
               final homeBloc = BlocProvider.of<HomeBloc>(context);
-              homeBloc.add(AddTaskEvent(taskname)); // adding event to add task
+              taskList.add(taskname);
+              homeBloc.add(AddTaskEvent(taskList)); // adding event to add task
               print('Entered name: $taskname');
             }
           });

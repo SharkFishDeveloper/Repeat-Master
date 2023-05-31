@@ -14,13 +14,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeScreenState> {
   }
 
   FutureOr<void> addTask(AddTaskEvent event, Emitter<HomeScreenState> emit) {
-     List<String> taskNameList=["first task"];
-
-     if(taskNameList.isNotEmpty){
-      taskNameList.add((event.task));
-     }
-    
-    emit(AddedTasksState(taskNameList));
+   
+    emit(AddedTasksState(event.taskList));
   }
 
   FutureOr<void> deleteTask(
