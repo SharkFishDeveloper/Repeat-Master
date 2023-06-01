@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     homeBloc = BlocProvider.of<HomeBloc>(context);
-    //homeBloc.add(GetTasksEvent());
+    homeBloc.add(GetTasksEvent());
   }
 
   @override
