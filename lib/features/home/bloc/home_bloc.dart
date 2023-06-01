@@ -33,7 +33,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeScreenState> {
   }
 
   FutureOr<void> deleteTask(
-      DeleteTaskEvent event, Emitter<HomeScreenState> emit) {}
+      DeleteTaskEvent event, Emitter<HomeScreenState> emit) async {
+    taskRepository.deleteTask(event.id);
+    final listtask = await taskRepository.getTasks();
+    emit(IntialHomeState(listtask));
+    print(" Successfully Deleted task");
+  }
 
   FutureOr<void> getTasks(
       GetTasksEvent event, Emitter<HomeScreenState> emit) async {

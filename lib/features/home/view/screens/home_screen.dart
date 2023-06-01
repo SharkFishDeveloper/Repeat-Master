@@ -38,8 +38,17 @@ class _HomeScreenState extends State<HomeScreen> {
             return ListView.builder(
               itemCount: state.taskList.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(state.taskList[index].title),
+                return Card(
+                  elevation: 2,
+                  child: ListTile(
+                    title: Text(state.taskList[index].title),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        homeBloc.add(DeleteTaskEvent(state.taskList[index].id));
+                      },
+                    ),
+                  ),
                 );
               },
             );
