@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeBloc=BlocProvider.of<HomeBloc>(context);
+    homeBloc = BlocProvider.of<HomeBloc>(context);
     //homeBloc.add(GetTasksEvent());
   }
 
@@ -58,21 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (BuildContext context) {
               return TaskInputDialog();
             },
-          ).then((taskname) {
-            if (taskname != null) {
-            
-
-              final task = TaskModal(
-                  title: taskname,
-                  isDone: false,
-                  description: "This is the description",
-                  dateTime: DateTime.now(),
-                  id: "1ntrow",
-                  rating: 5);
-
+          ).then((task) {
+            if (task != null) {
               homeBloc.add(AddTaskEvent(task));
               // adding event to add task
-              print('Entered name: $taskname');
+              print(task.toString());
             }
           });
         },
