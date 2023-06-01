@@ -4,11 +4,13 @@ part of 'home_bloc.dart';
 abstract class HomeEvent {}
 
 class AddTaskEvent extends HomeEvent {
-  List<String> taskList;
+  final TaskModal task;
   //final String task;
-  AddTaskEvent(this.taskList);
+  AddTaskEvent(this.task);
 }
 
 class DeleteTaskEvent extends HomeEvent {}
+
+class GetTasksEvent extends HomeEvent {}
 
 class SeeDetailsEvent extends HomeEvent {}

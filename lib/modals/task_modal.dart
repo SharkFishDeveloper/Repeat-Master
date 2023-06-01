@@ -10,7 +10,7 @@ class TaskModal extends Equatable {
   final String id;
   final int rating;
 
-  TaskModal({
+  const TaskModal({
     required this.title,
     required this.isDone,
     required this.description,

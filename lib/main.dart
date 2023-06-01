@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:repeat_master/features/home/home_repository/home_repo.dart';
 import 'package:repeat_master/features/home/view/screens/home_screen.dart';
 
 import 'features/home/bloc/home_bloc.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeBloc>(
-          create: (context) => HomeBloc(),
+          create: (context) => HomeBloc(TaskRepository()),
         ),
 
         // Add more BlocProviders as needed
