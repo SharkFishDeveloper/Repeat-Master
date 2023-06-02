@@ -9,7 +9,10 @@ class AddTaskEvent extends HomeEvent {
   AddTaskEvent(this.task);
 }
 
-class DeleteTaskEvent extends HomeEvent {}
+class DeleteTaskEvent extends HomeEvent {
+  final String id;
+  DeleteTaskEvent(this.id);
+}
 
 class GetTasksEvent extends HomeEvent {}
 

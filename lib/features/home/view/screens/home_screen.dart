@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     homeBloc = BlocProvider.of<HomeBloc>(context);
-    //homeBloc.add(GetTasksEvent());
+    homeBloc.add(GetTasksEvent());
   }
 
   @override
@@ -39,8 +39,17 @@ class _HomeScreenState extends State<HomeScreen> {
             return ListView.builder(
               itemCount: state.taskList.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(state.taskList[index].title),
+                return Card(
+                  elevation: 2,
+                  child: ListTile(
+                    title: Text(state.taskList[index].title),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        homeBloc.add(DeleteTaskEvent(state.taskList[index].id));
+                      },
+                    ),
+                  ),
                 );
               },
             );
@@ -59,20 +68,12 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (BuildContext context) {
               return TaskInputDialog();
             },
-          ).then((taskname) {
-            if (taskname != null) {
-              final task = TaskModal(
-                  title: taskname,
-                  isDone: false,
-                  description: "This is the description",
-                  dateTime: DateTime.now(),
-                  id: "1ntrow",
-                  rating: 5);
-
+          ).then((task) {
+            if (task != null) {
               homeBloc.add(AddTaskEvent(task));
               _scheduleNotification(task);
               // adding event to add task
-              print('Entered name: $taskname');
+              print(task.toString());
             }
           });
         },
