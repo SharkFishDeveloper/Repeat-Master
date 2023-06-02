@@ -1,6 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+
 class NotificationManager {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -26,9 +27,13 @@ class NotificationManager {
       importance: Importance.max,
       priority: Priority.high,
     );
-tz.initializeTimeZones();
-    final location = tz.getLocation('IST'); // Replace with your time zone identifier
-    
+    tz.initializeTimeZones();
+    DateTime now = DateTime.now();
+    var timezone = now.timeZoneName;
+    print(timezone);
+    final location = tz
+        .getLocation('Asia/Kolkata'); // Replace with your time zone identifier
+
     final scheduledDateTime = tz.TZDateTime.from(scheduledDate, location);
     //var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
@@ -36,7 +41,7 @@ tz.initializeTimeZones();
       //iOS: iOSPlatformChannelSpecifics,
     );
 
- await flutterLocalNotificationsPlugin.zonedSchedule(
+    await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
       title,
       body,

@@ -4,8 +4,13 @@ import 'package:repeat_master/features/home/home_repository/home_repo.dart';
 import 'package:repeat_master/features/home/view/screens/home_screen.dart';
 
 import 'features/home/bloc/home_bloc.dart';
+import 'features/notification/notification_manager.dart';
 
-void main() {
+void main()async {  WidgetsFlutterBinding.ensureInitialized();
+    final notificationManager = NotificationManager();
+  
+  // Initialize the notification manager
+  await notificationManager.initialize();
   runApp(const MyApp());
 }
 
