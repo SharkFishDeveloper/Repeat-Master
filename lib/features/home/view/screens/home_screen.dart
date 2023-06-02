@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:repeat_master/features/notification/notification_manager.dart';
 import 'package:repeat_master/modals/task_modal.dart';
 
 import '../../bloc/home_bloc.dart';
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeBloc=BlocProvider.of<HomeBloc>(context);
+    homeBloc = BlocProvider.of<HomeBloc>(context);
     //homeBloc.add(GetTasksEvent());
   }
 
@@ -60,8 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ).then((taskname) {
             if (taskname != null) {
-            
-
               final task = TaskModal(
                   title: taskname,
                   isDone: false,
@@ -71,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   rating: 5);
 
               homeBloc.add(AddTaskEvent(task));
+              _scheduleNotification(task);
               // adding event to add task
               print('Entered name: $taskname');
             }
@@ -78,6 +78,20 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: const Icon(Icons.add),
       ),
+    );
+  }
+
+  void _scheduleNotification(TaskModal task) async {
+    const id = 1; // Unique ID for the notification
+    final title = task.title;
+    final body = task.description;
+    final scheduledDate = DateTime.now().add(const Duration(seconds: 5));
+    final notificationManager = NotificationManager();
+    await notificationManager.scheduleNotification(
+      id: id,
+      title: title,
+      body: body,
+      scheduledDate: scheduledDate,
     );
   }
 }
