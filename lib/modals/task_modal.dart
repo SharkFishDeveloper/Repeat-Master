@@ -2,13 +2,21 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+enum Rating{
+  low,
+  medium, 
+  high,
+  highest
+}
+
+
 class TaskModal extends Equatable {
   final String title;
   final bool isDone;
   final String description;
   final DateTime dateTime;
   final String id;
-  final int rating;
+  final Rating rating;
 
   const TaskModal({
     required this.title,
@@ -25,7 +33,7 @@ class TaskModal extends Equatable {
     String? description,
     DateTime? dateTime,
     String? id,
-    int? rating,
+    Rating ? rating,
   }) {
     return TaskModal(
       title: title ?? this.title,
@@ -55,7 +63,7 @@ class TaskModal extends Equatable {
       description: map['description'] ?? '',
       dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime']),
       id: map['id'] ?? '',
-      rating: map['rating']?.toInt() ?? 0,
+      rating: map['rating']??Rating.low,
     );
   }
 

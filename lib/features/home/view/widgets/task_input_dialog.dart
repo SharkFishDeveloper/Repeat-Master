@@ -47,7 +47,7 @@ class _TaskInputDialogState extends State<TaskInputDialog> {
                 description: desc,
                 dateTime: DateTime.now(),
                 id: DateTime.now().toString(),
-                rating: 5);
+                rating: Rating.low);
             Navigator.of(context)
                 .pop(task); // Pass the entered name as the result
           },
