@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:repeat_master/features/do_after_feature/do_after_logic.dart';
 import 'package:repeat_master/modals/task_modal.dart';
 
 class TaskInputDialog extends StatefulWidget {
@@ -41,13 +42,15 @@ class _TaskInputDialogState extends State<TaskInputDialog> {
           onPressed: () {
             String name = _nameController.text;
             String desc = _descController.text;
+
             final task = TaskModal(
                 title: name,
                 isDone: false,
                 description: desc,
                 dateTime: DateTime.now(),
                 id: DateTime.now().toString(),
-                rating: Rating.low);
+                rating: Rating.low,
+                remainingDaysToRevise: DoAfterDays.afterDays);
             Navigator.of(context)
                 .pop(task); // Pass the entered name as the result
           },
