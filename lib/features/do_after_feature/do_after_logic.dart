@@ -7,6 +7,7 @@ class DoAfterDays {
       index = 0;
     }
     index++;
+    print("hahah");
   }
 
   static get dateAndTimeNow => DateTime.now();
@@ -18,6 +19,4 @@ class DoAfterDays {
     int reviseAfterDays = afterDays - daysToSubtract;
     return reviseAfterDays;
   }
-
-
 }

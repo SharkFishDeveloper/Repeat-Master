@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           create: (context) => HomeBloc(TaskRepository()),
         ),
         BlocProvider<DoAfterBloc>(
-          create: (context) => DoAfterBloc(),
+          create: (context) => DoAfterBloc(TaskRepository()),
         ),
 
         // Add more BlocProviders as needed
