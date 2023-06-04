@@ -7,7 +7,16 @@ class DoAfterDays {
       index = 0;
     }
     index++;
+    print("hahah");
   }
 
+  static get dateAndTimeNow => DateTime.now();
   static get afterDays => doAfterDays[index];
+
+  static int daystoSubtract(DateTime dateTimeAfterButtonClick) {
+    Duration difference = dateAndTimeNow.difference(dateTimeAfterButtonClick);
+    int daysToSubtract = difference.inDays;
+    int reviseAfterDays = afterDays - daysToSubtract;
+    return reviseAfterDays;
+  }
 }

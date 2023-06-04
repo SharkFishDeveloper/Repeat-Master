@@ -2,13 +2,9 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-enum Rating{
-  low,
-  medium, 
-  high,
-  highest
-}
+import '../features/do_after_feature/do_after_logic.dart';
 
+enum Rating { low, medium, high, highest }
 
 class TaskModal extends Equatable {
   final String title;
@@ -17,6 +13,7 @@ class TaskModal extends Equatable {
   final DateTime dateTime;
   final String id;
   final Rating rating;
+  final int remainingDaysToRevise;
 
   const TaskModal({
     required this.title,
@@ -25,6 +22,7 @@ class TaskModal extends Equatable {
     required this.dateTime,
     required this.id,
     required this.rating,
+    required this.remainingDaysToRevise
   });
 
   TaskModal copyWith({
@@ -33,7 +31,8 @@ class TaskModal extends Equatable {
     String? description,
     DateTime? dateTime,
     String? id,
-    Rating ? rating,
+    Rating? rating,
+    int? remainingDaysToRevise
   }) {
     return TaskModal(
       title: title ?? this.title,
@@ -42,6 +41,7 @@ class TaskModal extends Equatable {
       dateTime: dateTime ?? this.dateTime,
       id: id ?? this.id,
       rating: rating ?? this.rating,
+      remainingDaysToRevise : remainingDaysToRevise??this.remainingDaysToRevise
     );
   }
 
@@ -53,6 +53,7 @@ class TaskModal extends Equatable {
       'dateTime': dateTime.millisecondsSinceEpoch,
       'id': id,
       'rating': rating,
+      "remainingDaysToRevise": remainingDaysToRevise
     };
   }
 
@@ -63,7 +64,8 @@ class TaskModal extends Equatable {
       description: map['description'] ?? '',
       dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime']),
       id: map['id'] ?? '',
-      rating: map['rating']??Rating.low,
+      rating: map['rating'] ?? Rating.low,
+      remainingDaysToRevise: map['remainingDaysToRevise'] ?? DoAfterDays.afterDays
     );
   }
 
@@ -99,8 +101,8 @@ class TaskModal extends Equatable {
   //       id.hashCode ^
   //       rating.hashCode;
   // }
-  
+
   @override
   // TODO: implement props
-  List<Object?> get props => [id,title,rating,dateTime,isDone,description];
+  List<Object?> get props => [id, title, rating, dateTime, isDone, description];
 }

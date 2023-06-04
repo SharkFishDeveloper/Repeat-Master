@@ -33,6 +33,7 @@ class TaskRepository {
             description TEXT,
             date_time INTEGER,
             rating INTEGER
+            remainingDaysToRevise INTEGER 
           )
         ''');
       },
@@ -51,6 +52,7 @@ class TaskRepository {
         dateTime: DateTime.fromMillisecondsSinceEpoch(maps[i]['date_time']),
         id: maps[i]['id'],
         rating: maps[i]['rating'],
+        remainingDaysToRevise: maps[i]['remainingDaysToRevise'],
       );
     });
   }
@@ -66,6 +68,7 @@ class TaskRepository {
           'description': task.description,
           'date_time': task.dateTime.millisecondsSinceEpoch,
           'rating': task.rating,
+          'remainingDaysToRevise':task.remainingDaysToRevise
         },
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
@@ -87,6 +90,7 @@ Future<void> updateTask(TaskModal task) async {
       'description': task.description,
       'date_time': task.dateTime.millisecondsSinceEpoch,
       'rating': task.rating,
+      'remainingDaysToRevise':task.remainingDaysToRevise
     },
     where: 'id = ?',
     whereArgs: [task.id],
