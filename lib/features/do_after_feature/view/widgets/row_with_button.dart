@@ -24,8 +24,8 @@ class _DoAfterDaysWidgetState extends State<DoAfterDaysWidget> {
     print("Row wid ran");
     super.initState();
     taskBloc = BlocProvider.of<TaskBloc>(context);
-    taskBloc.add(
-        CalculateRemainingDaysEvent()); //*calculates the remaining days of the task as soon as the widget is initalized
+    taskBloc.add(RevisionDoneEvent(
+                  taskModal: widget.taskModal, index: widget.index)); //*calculates the remaining days of the task as soon as the widget is initalized
     //DoAfterDays.daystoSubtract();
   }
 

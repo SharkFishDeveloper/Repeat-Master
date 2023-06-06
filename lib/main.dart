@@ -5,7 +5,7 @@ import 'package:repeat_master/features/home/home_repository/home_repo.dart';
 import 'package:repeat_master/features/home/view/screens/home_screen.dart';
 import 'package:repeat_master/features/task/bloc/task_bloc.dart';
 
-import 'features/home/bloc/home_bloc.dart';
+
 import 'features/notification/notification_manager.dart';
 
 void main()async {  WidgetsFlutterBinding.ensureInitialized();

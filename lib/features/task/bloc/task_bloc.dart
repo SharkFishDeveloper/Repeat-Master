@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+
 import 'package:repeat_master/features/do_after_feature/do_after_logic.dart';
 
 import '../../../modals/task_modal.dart';
@@ -16,17 +16,14 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskRepository taskRepository;
 
   TaskBloc(this.taskRepository) : super(const TaskState(tasks: [])) {
-    on<CalculateRemainingDaysEvent>(calculateRemainingDays);
+    //on<CalculateRemainingDaysEvent>(calculateRemainingDays);
     // on<UpdateTaskEvent>(updateTask);
     on<AddTaskEvent>(addTask);
     on<GetTasksEvent>(getTasks);
     on<RevisionDoneEvent>(revisionDone);
   }
 
-  FutureOr<void> calculateRemainingDays(
-      CalculateRemainingDaysEvent event, Emitter<TaskState> emit) {
-    //* this method should run initial as soon as the widget is loaded
-  }
+
 
   // void _calculateRemainingDays() {
   //   final now = DateTime.now();
@@ -91,4 +88,29 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       print("Error updating task : " + e.toString());
     }
   }
+
+  // FutureOr<void> calculateRemainingDays(CalculateRemainingDaysEvent event, Emitter<TaskState> emit) {
+
+  //   int daysSinceTaskCreated =
+  //       DoAfterDays.GetDaysSinceTaskCreated(event.taskModal.dateTime);
+  //   int remainingDays =
+  //       DoAfterDays.GetRemainingDaysTORevise(daysSinceTaskCreated);
+  //   print("remainingDays by calculation: $remainingDays");
+  //   final updatedTaskModal = state.tasks[event.index]
+  //       .copyWith(remainingDaysToRevise: remainingDays);
+
+  //   try {
+  //     taskRepository.updateTask(updatedTaskModal);
+  //     List<TaskModal> updatedTasks = [...state.tasks];
+  //     updatedTasks[event.index] = updatedTaskModal;
+  //     emit(TaskState(tasks: updatedTasks));
+  //     // newTasks.(event.task);
+  //     // emit(TaskState(tasks: newTasks));
+  //     print("Updated tasks is : $updatedTasks");
+  //     print("updatedTaskModal is: ${updatedTaskModal.toString()}");
+  //     print("done updating task : ");
+  //   } catch (e) {
+  //     print("Error updating task : " + e.toString());
+  //   }
+  // }
 }
