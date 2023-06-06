@@ -17,10 +17,10 @@ class RemainingDaysEvent extends DoAfterEvent {
   
 }
 
-class RevisionDoneEvent extends DoAfterEvent {
-  final DateTime dateTime;
+// class RevisionDoneEvent extends DoAfterEvent {
+//   final DateTime dateTime;
 
-  const RevisionDoneEvent(this.dateTime);
-}
+//   const RevisionDoneEvent(this.dateTime);
+// }
 
 //class RevisionDeadlineExceededEvent extends DoAfterEvent {}

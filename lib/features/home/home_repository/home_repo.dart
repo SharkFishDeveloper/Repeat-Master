@@ -89,7 +89,7 @@ Future<void> updateTask(TaskModal task) async {
       'is_done': task.isDone ? 1 : 0,
       'description': task.description,
       'date_time': task.dateTime.millisecondsSinceEpoch,
-      'rating': task.rating,
+      'rating': task.ratingToInt(task.rating),
       'remainingDaysToRevise':task.remainingDaysToRevise
     },
     where: 'id = ?',

@@ -24,3 +24,12 @@ class AddTaskEvent extends TaskEvent {
 }
 
 class GetTasksEvent extends TaskEvent {}
+
+class RevisionDoneEvent extends TaskEvent {
+  final TaskModal taskModal;
+  final int index;
+  
+ const  RevisionDoneEvent({required this.index,
+    required this.taskModal,
+  });
+}

@@ -35,28 +35,34 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Repeat master'),
       ),
       body: BlocBuilder<TaskBloc, TaskState>(
-        bloc: taskBloc,
-        builder: (context, state) {
-         
+          bloc: taskBloc,
+          builder: (context, state) {
             if (state.tasks.isEmpty) {
-              return const Center(child: Text('Nothing to show'));}
-            
+              return const Center(child: Text('Nothing to show'));
+            }
+
             return ListView.builder(
               itemCount: state.tasks.length,
               itemBuilder: (BuildContext context, int index) {
+                print("List ran");
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
                     elevation: 2,
                     child: ExpansionTile(
                       title: Text(state.tasks[index].title),
+                      subtitle: Text(
+                          state.tasks[index].remainingDaysToRevise.toString()),
                       children: [
                         ListTile(
                           title: Text(state.tasks[index].description),
                           trailing: const Text("Days"),
                           // Add any additional widgets or functionality
                         ),
-                        const DoAfterDaysWidget()
+                        DoAfterDaysWidget(
+                          taskModal: state.tasks[index],
+                          index: index,
+                        )
                       ],
                     ),
                   ),
@@ -64,14 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             );
           }
-        //    else if (state is LoadingState) {
-        //     return const Center(child: CircularProgressIndicator());
-        //   }
-        //   return const Center(
-        //     child: Text("this never runs"),
-        //   );
-        // },
-      ),
+          //    else if (state is LoadingState) {
+          //     return const Center(child: CircularProgressIndicator());
+          //   }
+          //   return const Center(
+          //     child: Text("this never runs"),
+          //   );
+          // },
+          ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(

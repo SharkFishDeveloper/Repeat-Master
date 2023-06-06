@@ -12,15 +12,15 @@ class DoAfterBloc extends Bloc<DoAfterEvent, DoAfterState> {
    TaskRepository taskRepository;
   DoAfterBloc(this.taskRepository) : super(const DoAfterInitialState(1)) {
     on<RemainingDaysEvent>(calculateRemainingDays);
-    on<RevisionDoneEvent>(revisionDone);
+   // on<RevisionDoneEvent>(revisionDone);
   }
 
-  FutureOr<void> revisionDone(
-      RevisionDoneEvent event, Emitter<DoAfterState> emit) {
-       // TODO : call the home repository insert method to save the date and time of the task after done button click
+  // FutureOr<void> revisionDone(
+  //     RevisionDoneEvent event, Emitter<DoAfterState> emit) {
+  //      // TODO : call the home repository insert method to save the date and time of the task after done button click
        
 
-  }
+  // }
 
   FutureOr<void> calculateRemainingDays(
       RemainingDaysEvent event, Emitter<DoAfterState> emit) {}

@@ -65,7 +65,7 @@ class TaskModal extends Equatable {
       dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime']),
       id: map['id'] ?? '',
       rating: map['rating'] ?? Rating.low,
-      remainingDaysToRevise: map['remainingDaysToRevise'] ?? DoAfterDays.afterDays
+      remainingDaysToRevise: map['remainingDaysToRevise'] //TODO : some changes
     );
   }
 
@@ -76,7 +76,7 @@ class TaskModal extends Equatable {
 
   @override
   String toString() {
-    return 'TaskModal(title: $title, isDone: $isDone, description: $description, dateTime: $dateTime, id: $id, rating: $rating)';
+    return 'TaskModal(title: $title, isDone: $isDone, description: $description, dateTime: $dateTime, id: $id, rating: $rating,remainingDays: $remainingDaysToRevise,)';
   }
 
   // @override
@@ -131,5 +131,5 @@ Rating intToRating(int ratingInt) {
 }
   @override
   // TODO: implement props
-  List<Object?> get props => [id, title, rating, dateTime, isDone, description];
+  List<Object?> get props => [id, title, rating, dateTime, isDone, description,remainingDaysToRevise];
 }

@@ -16,6 +16,7 @@ class _TaskInputDialogState extends State<TaskInputDialog> {
     return AlertDialog(
       title: const Text('Task name'),
       content: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: _nameController,
