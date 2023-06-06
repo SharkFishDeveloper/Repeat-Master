@@ -15,7 +15,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeScreenState> {
   HomeBloc(this.taskRepository) : super(IntialHomeState(const [])) {
     on<AddTaskEvent>(addTask);
     on<DeleteTaskEvent>(deleteTask);
-    on<GetTasksEvent>(getTasks);
+   // on<GetTasksEvent>(getTasks);
   }
 
   FutureOr<void> addTask(
@@ -40,15 +40,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeScreenState> {
     print(" Successfully Deleted task");
   }
 
-  FutureOr<void> getTasks(
-      GetTasksEvent event, Emitter<HomeScreenState> emit) async {
-    final List<TaskModal> tasks;
-    emit(LoadingState());
-    try {
-      tasks = await taskRepository.getTasks();
-      emit(IntialHomeState(tasks));
-    } catch (e) {
-      print("Error getting task : " + e.toString());
-    }
-  }
+  // FutureOr<void> getTasks(
+  //     GetTasksEvent event, Emitter<HomeScreenState> emit) async {
+  //   final List<TaskModal> tasks;
+  //   emit(LoadingState());
+  //   try {
+  //     tasks = await taskRepository.getTasks();
+  //     emit(IntialHomeState(tasks));
+  //   } catch (e) {
+  //     print("Error getting task : " + e.toString());
+  //   }
+  // }
 }

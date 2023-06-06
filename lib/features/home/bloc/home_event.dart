@@ -14,6 +14,6 @@ class DeleteTaskEvent extends HomeEvent {
   DeleteTaskEvent(this.id);
 }
 
-class GetTasksEvent extends HomeEvent {}
+// class GetTasksEvent extends HomeEvent {}
 
 class SeeDetailsEvent extends HomeEvent {}

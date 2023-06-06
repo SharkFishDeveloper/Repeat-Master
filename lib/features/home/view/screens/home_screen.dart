@@ -6,7 +6,8 @@ import 'package:repeat_master/features/notification/notification_manager.dart';
 import 'package:repeat_master/modals/task_modal.dart';
 
 import '../../../do_after_feature/view/widgets/row_with_button.dart';
-import '../../bloc/home_bloc.dart';
+import '../../../task/bloc/task_bloc.dart';
+//import '../../bloc/home_bloc.dart';
 import '../widgets/task_input_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late final HomeBloc homeBloc;
+  late final TaskBloc taskBloc;
   final notificationAfterseconds = 5;
   final List<String> taskList = [];
   Timer? notificationTimer;
@@ -23,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeBloc = BlocProvider.of<HomeBloc>(context);
-    homeBloc.add(GetTasksEvent());
+    taskBloc = BlocProvider.of<TaskBloc>(context);
+    taskBloc.add(GetTasksEvent());
   }
 
   @override
@@ -33,25 +34,26 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Repeat master'),
       ),
-      body: BlocBuilder<HomeBloc, HomeScreenState>(
+      body: BlocBuilder<TaskBloc, TaskState>(
+        bloc: taskBloc,
         builder: (context, state) {
-          if (state is IntialHomeState) {
-            if (state.taskList.isEmpty) {
-              return const Center(child: Text('Nothing to show'));
-            }
+         
+            if (state.tasks.isEmpty) {
+              return const Center(child: Text('Nothing to show'));}
+            
             return ListView.builder(
-              itemCount: state.taskList.length,
+              itemCount: state.tasks.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
                     elevation: 2,
                     child: ExpansionTile(
-                      title: Text(state.taskList[index].title),
+                      title: Text(state.tasks[index].title),
                       children: [
                         ListTile(
-                          title: Text(state.taskList[index].description),
-                          trailing: Text("Days"),
+                          title: Text(state.tasks[index].description),
+                          trailing: const Text("Days"),
                           // Add any additional widgets or functionality
                         ),
                         const DoAfterDaysWidget()
@@ -61,13 +63,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             );
-          } else if (state is LoadingState) {
-            return const Center(child: CircularProgressIndicator());
           }
-          return const Center(
-            child: Text("this never runs"),
-          );
-        },
+        //    else if (state is LoadingState) {
+        //     return const Center(child: CircularProgressIndicator());
+        //   }
+        //   return const Center(
+        //     child: Text("this never runs"),
+        //   );
+        // },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -78,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ).then((task) {
             if (task != null) {
-              homeBloc.add(AddTaskEvent(task));
+              taskBloc.add(AddTaskEvent(task));
               // _scheduleNotification(task);
               // adding event to add task
               print(task.toString());

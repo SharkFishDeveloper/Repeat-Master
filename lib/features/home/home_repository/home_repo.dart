@@ -32,7 +32,7 @@ class TaskRepository {
             is_done INTEGER,
             description TEXT,
             date_time INTEGER,
-            rating INTEGER
+            rating INTEGER,
             remainingDaysToRevise INTEGER 
           )
         ''');
@@ -51,7 +51,7 @@ class TaskRepository {
         description: maps[i]['description'],
         dateTime: DateTime.fromMillisecondsSinceEpoch(maps[i]['date_time']),
         id: maps[i]['id'],
-        rating: maps[i]['rating'],
+        rating:intToRating( maps[i]['rating']),
         remainingDaysToRevise: maps[i]['remainingDaysToRevise'],
       );
     });
@@ -67,7 +67,7 @@ class TaskRepository {
           'is_done': task.isDone ? 1 : 0,
           'description': task.description,
           'date_time': task.dateTime.millisecondsSinceEpoch,
-          'rating': task.rating,
+          'rating': task.ratingToInt(task.rating),
           'remainingDaysToRevise':task.remainingDaysToRevise
         },
         conflictAlgorithm: ConflictAlgorithm.replace);
@@ -95,6 +95,21 @@ Future<void> updateTask(TaskModal task) async {
     where: 'id = ?',
     whereArgs: [task.id],
   );
+}
+
+Rating intToRating(int ratingInt) {
+  switch (ratingInt) {
+    case 3:
+      return Rating.low;
+    case 2:
+      return Rating.medium;
+    case 1:
+      return Rating.high;
+    default:
+      // Handle any unrecognized string, such as returning a default value or throwing an exception.
+      // In this example, we return Rating.low as a default value.
+      return Rating.low;
+  }
 }
 
 }

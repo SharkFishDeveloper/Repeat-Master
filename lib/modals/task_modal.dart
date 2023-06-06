@@ -102,6 +102,33 @@ class TaskModal extends Equatable {
   //       rating.hashCode;
   // }
 
+int ratingToInt(Rating rating) {
+  switch (rating) {
+    case Rating.low:
+      return 3;
+    case Rating.medium:
+      return 2;
+    case Rating.high:
+      return 1;
+    default:
+      return 0;
+  }
+}
+
+Rating intToRating(int ratingInt) {
+  switch (ratingInt) {
+    case 3:
+      return Rating.low;
+    case 2:
+      return Rating.medium;
+    case 1:
+      return Rating.high;
+    default:
+      // Handle any unrecognized string, such as returning a default value or throwing an exception.
+      // In this example, we return Rating.low as a default value.
+      return Rating.low;
+  }
+}
   @override
   // TODO: implement props
   List<Object?> get props => [id, title, rating, dateTime, isDone, description];
