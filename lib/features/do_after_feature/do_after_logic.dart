@@ -19,7 +19,7 @@ class DoAfterDays {
     print("index incremented");
   }
 
-  static get dateAndTimeNow => DateTime.now().add(Duration(days: 3));
+  static get dateAndTimeNow => DateTime.now();
   static get afterDays => doAfterDays[index];
 
    static int GetDaysSinceTaskCreated(DateTime createdDate) {

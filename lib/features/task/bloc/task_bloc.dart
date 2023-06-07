@@ -23,8 +23,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<RevisionDoneEvent>(revisionDone);
   }
 
-
-
   // void _calculateRemainingDays() {
   //   final now = DateTime.now();
   //   final today = DateTime(now.year, now.month, now.day);
@@ -71,21 +69,24 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     int remainingDays =
         DoAfterDays.GetRemainingDaysTORevise(daysSinceTaskCreated);
     print("remainingDays by calculation: $remainingDays");
-    final updatedTaskModal = state.tasks[event.index]
-        .copyWith(remainingDaysToRevise: remainingDays);
 
-    try {
-      taskRepository.updateTask(updatedTaskModal);
-      List<TaskModal> updatedTasks = [...state.tasks];
-      updatedTasks[event.index] = updatedTaskModal;
-      emit(TaskState(tasks: updatedTasks));
-      // newTasks.(event.task);
-      // emit(TaskState(tasks: newTasks));
-      print("Updated tasks is : $updatedTasks");
-      print("updatedTaskModal is: ${updatedTaskModal.toString()}");
-      print("done updating task : ");
-    } catch (e) {
-      print("Error updating task : " + e.toString());
+    if (state.tasks[event.index].remainingDaysToRevise != remainingDays) {
+      final updatedTaskModal = state.tasks[event.index]
+          .copyWith(remainingDaysToRevise: remainingDays);
+
+      try {
+        taskRepository.updateTask(updatedTaskModal);
+        List<TaskModal> updatedTasks = [...state.tasks];
+        updatedTasks[event.index] = updatedTaskModal;
+        emit(TaskState(tasks: updatedTasks));
+        // newTasks.(event.task);
+        // emit(TaskState(tasks: newTasks));
+        print("Updated tasks is : $updatedTasks");
+        print("updatedTaskModal is: ${updatedTaskModal.toString()}");
+        print("done updating task : ");
+      } catch (e) {
+        print("Error updating task : " + e.toString());
+      }
     }
   }
 
